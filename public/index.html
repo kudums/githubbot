@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XT Institutions</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="sticky-top">
+        <h3 class="text-white">
+            <i>Github Bot</i>
+        </h3>
+    </header>
+    <div class="hero-unit mt-5">
+        <div class="container">
+            <div class="form-group input-group">
+                <input type="text" id="userDesire" class="form-control" style="border-color: black;" placeholder="What you want to do?" onkeypress="submitUserDesire(event);"
+                />
+            </div>
+        </div>
+    </div>
+    <div>
+        <!--- Repo code-->
+        <div id="creatRepoDiv" style="display:none" role="tabpanel" class="tab-pane" aria-labelledby="pills-home-tab">
+            <div class="hero-unit mt-5">
+                <div class="container">
+                    <div class="form-group input-group">
+                        <button type="button" class="btn btn-dark" id="submitQuery" data-toggle="collapse" onclick="submitRepoCreation()" data-target="#createRepo">Submit</button>
+                        <input type="text" id="query" class="form-control" style="border-color: black;" placeholder="Query" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="border alert alert-secondary collapse" id="createRepo">
+                <div class="container card card-body" style="content: \e003">
+                    <form>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Repository Name :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="repository" placeholder="Repository Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">Description :</label>
+                            <div class="col-sm-10">
+                                <input type="description" class="form-control border border-dark" id="description" placeholder="Enter Description">
+                            </div>
+                        </div>
+                        <p>
+                            <button class="btn btn-dark float-right" type="button" data-toggle="collapse" data-target="#createRepo" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#repoCreatePopup" onclick="createRepositoryOnGithub()">Create</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal" id="repoCreatePopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title bg-unfo" id="exampleModalLongTitle">Creation Status</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div id="repoNameInpop" class="h5" style="text-align: center"></div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Create Issue Code-->
+        <div id="crateIssueDiv" style="display:none" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="hero-unit mt-5">
+                <div class="container">
+                    <div class="form-group input-group">
+                        <button type="button" class="btn btn-dark" id="submitQueryforIssue" data-toggle="collapse" onclick="submitIssueCreation()"
+                            data-target="#createIssue">Submit</button>
+                        <input type="text" id="IssueQuery" class="form-control" style="border-color: black;" placeholder="Query" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="border alert alert-secondary collapse" id="createIssue">
+                <div class="container card card-body" style="content: \e003">
+                    <form>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Repository Name :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="issueInRepo" placeholder="Repository Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Issue :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="issue" placeholder="Repository Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">Issue Description:</label>
+                            <div class="col-sm-10">
+                                <input type="description" class="form-control border border-dark" id="issueDescription" placeholder="Enter Description">
+                            </div>
+                        </div>
+                        <p>
+                            <button class="btn btn-dark float-right" type="button" data-toggle="collapse" data-target="#createIssue" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#issueCreatePopup" onclick="createIssueOnGithub()">Create</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="modal" id="issueCreatePopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title bg-unfo" id="exampleModalLongTitleForIssue">Issue Creation Status</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div id="issueNameInpop" class="h5" style="text-align: center"></div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--edit Issues-->
+        <div id="editIssueDiv" style="display:none" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="hero-unit mt-5">
+                <div class="container">
+                    <div class="form-group input-group">
+                        <button type="button" class="btn btn-dark" id="submitQueryforEditIssue" data-toggle="collapse" onclick="editIssueQuerySubmit()"
+                            data-target="#editIssue">Submit</button>
+                        <input type="text" id="editIssueQuerySubmit" class="form-control" style="border-color: black;" placeholder="Query" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="border alert alert-secondary collapse" id="editIssue">
+                <div class="container card card-body" style="content: \e003">
+                    <form>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Repository Name :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="editIssueInRepo" placeholder="Repository Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Issue No:</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="issueNo" placeholder="Issue No">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">Issue Status:</label>
+                            <div class="col-sm-10">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="statusOption">
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="options" id="open" autocomplete="off">Open
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="options" id="close" autocomplete="off">Close
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <button class="btn btn-dark float-right" type="button" data-toggle="collapse" data-target="#editIssue" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#issueEditPopup" onclick="editStatusOnGithub()">Edit</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="modal" id="issueEditPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title bg-unfo" id="exampleModalLongTitleForeditedIssue">Issue Status</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div id="editedIssueInpop" class="h5" style="text-align: center"></div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--get Issues-->
+        <div id="getIssueDetailsDiv" style="display:none" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="hero-unit mt-5">
+                <div class="container">
+                    <div class="form-group input-group">
+                        <button type="button" class="btn btn-dark" id="queryToGetIssues" data-toggle="collapse" onclick="getIssuesQuery()" data-target="#getIssue">Submit</button>
+                        <input type="text" id="getIssueQuery" class="form-control" style="border-color: black;" placeholder="Query" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="border alert alert-secondary collapse" id="getIssue">
+                <div class="container card card-body" style="content: \e003">
+                    <form>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Repository Name :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="getIssuesInRepo" placeholder="Repository Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Target:</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="target" placeholder="issue of">
+                            </div>
+                        </div>
+                        <p>
+                            <button class="btn btn-dark float-right" type="button" data-toggle="collapse" data-target="#getIssue" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-dark" type="button" data-toggle="modal" data-target="#issueGetPopup" onclick="getIssuefromRepo()">Proceed</button>
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Issue Modal -->
+            <div class="modal" id="issueGetPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title bg-unfo" id="exampleModalLongTitleForGetIssue">Issue Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="h5" style="text-align: center">
+                                    <table class="table" id="IssueDetails">
+                                        <thead class="thead-dark" id="getIssueHeader"></thead>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+        <!--Add collbarator-->
+        <div id="addUserDiv" style="display:none" class="tab-pane" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+            <div class="hero-unit mt-5">
+                <div class="container">
+                    <div class="form-group input-group">
+                        <button type="button" class="btn btn-dark" id="submitUserAdditionQuery" data-toggle="collapse" onclick="submitUserAddingRequest()"
+                            data-target="#createUser">Submit</button>
+                        <input type="text" id="userCreationQuery" class="form-control" style="border-color: black;" placeholder="Query" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="border alert alert-secondary collapse" id="createUser">
+                <div class="container card card-body" style="content: \e003">
+                    <form>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Repository Name :</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control form-control-sm border border-dark" id="userForRepository" placeholder="Repository Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">User Name :</label>
+                            <div class="col-sm-10">
+                                <input type="description" class="form-control border border-dark" id="userName" placeholder="Enter User">
+                            </div>
+                        </div>
+                        <p>
+                            <button class="btn btn-dark float-right" type="button" data-toggle="collapse" data-target="#createUser" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#userAdditionPopup" onclick="addUserOnGithub()">Add</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal" id="userAdditionPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title bg-unfo" id="exampleModalLongTitle">Addition Status</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div id="userNameInpop" class="h5" style="text-align: center"></div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <footer class="fixed-bottom">
+        <div class="container text-center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="imgdislay">
+                            <img src="img/instagramicon.png" alt="instagram" class="img-fluid" />
+                            <img src="img/facebookicon.png" alt="facebook" class="img-fluid" />
+                            <img src="img/youtube.png" alt="youtube" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- jQuery library -->
+    <script src="../js/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="../js/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../src/index.js"></script>
+</body>
+
+</html>

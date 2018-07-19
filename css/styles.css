@@ -1,0 +1,41 @@
+
+
+* {
+  box-sizing: border-box; }
+
+body {
+  font-family: Arial;
+  padding: 0px;
+  margin: 0;
+  background: #f1f1f1; }
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 14px;
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+  /* Set up positioning */
+  top: 0;
+  left: 0; }
+
+.imgdislay img {
+  height: 35px;
+  width: 50px; }
+
+  header {
+    background-color: rgb(48, 37, 34);
+    height: 30px;
+}
+footer {  
+  background-color:rgb(48, 37, 34);
+  height: 30px;
+  padding-bottom: 0;
+}
